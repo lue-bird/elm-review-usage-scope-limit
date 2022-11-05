@@ -11,46 +11,35 @@ when inside the directory containing this file.
 
 -}
 
-import Documentation.ReadmeLinksPointToCurrentVersion
-import NoDebug.Log
-import NoDebug.TodoOrToString
-import NoExposingEverything
-import NoForbiddenWords
-import NoImportingEverything
-import NoMissingTypeAnnotation
-import NoMissingTypeAnnotationInLetIn
-import NoMissingTypeExpose
-import NoUnused.CustomTypeConstructorArgs
-import NoUnused.CustomTypeConstructors
-import NoUnused.Dependencies
-import NoUnused.Exports
-import NoUnused.Modules
-import NoUnused.Parameters
-import NoUnused.Patterns
-import NoUnused.Variables
-import Review.Rule as Rule exposing (Rule)
-import Simplify
+import UsageScopeLimit
 
 
 config : List Rule
 config =
-    [ Documentation.ReadmeLinksPointToCurrentVersion.rule
-    , NoDebug.Log.rule
-    , NoDebug.TodoOrToString.rule
-        |> Rule.ignoreErrorsForDirectories [ "tests/" ]
-    , NoExposingEverything.rule
-    , NoForbiddenWords.rule [ "REPLACEME" ]
-    , NoImportingEverything.rule []
-    , NoMissingTypeAnnotation.rule
-    , NoMissingTypeAnnotationInLetIn.rule
-    , NoMissingTypeExpose.rule
-    , NoUnused.CustomTypeConstructors.rule []
-    , NoUnused.CustomTypeConstructorArgs.rule
-    , NoUnused.Dependencies.rule
-    , NoUnused.Exports.rule
-    , NoUnused.Modules.rule
-    , NoUnused.Parameters.rule
-    , NoUnused.Patterns.rule
-    , NoUnused.Variables.rule
-    , Simplify.rule
+    [ UsageScopeLimit.for
+        [ UsageScopeLimit.modulesEndingWith [ "Internal" ] ]
+        |> UsageScopeLimit.toInside
+            [ UsageScopeLimit.baseModules ]
+        |> UsageScopeLimit.because
+            [ """This keeps the `module` structure organized,
+never "leaking" any implementation details into other `module`s"""
+            ]
+    ]
+
+
+forbiddenFunctionOrValues : List String
+forbiddenFunctionOrValues =
+    [ -- use tuple destructuring instead
+      -- for improved descriptiveness
+      "Tuple.first"
+    , "Tuple.second"
+    , -- use `mapFirst |> mapSecond` instead
+      "Tuple.mapBoth"
+    , "Basics.always"
+    , -- use `String.indexes` instead
+      "String.indices"
+    , -- use a `case` instead
+      "String.isEmpty"
+    , "List.isEmpty"
+    , "List.tail"
     ]

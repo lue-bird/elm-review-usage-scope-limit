@@ -1,29 +1,16 @@
-# elm-review-no-function-outside-of-modules
+# elm-review-usage-scope-limit
 
-Provides [`elm-review`](https://package.elm-lang.org/packages/jfmengels/elm-review/latest/) rules to forbid using functions outside of certain modules.
+[`UsageScopeLimit`](https://package.elm-lang.org/packages/lue-bird/elm-review-usage-scope-limit/2.0.0/UsageScopeLimit): Limit using certain named things to certain spaces
 
-## Provided rules
+> [The `Config` documentation](UsageScopeLimit#Config) covers **multiple examples and use-cases → Give them a 👀**
 
-- [`NoFunctionOutsideOfModules`](https://package.elm-lang.org/packages/NeoVier/elm-review-no-function-outside-of-modules/2.0.0/NoFunctionOutsideOfModules) - Reports uses of certain functions outside of certain modules.
+## improvements from [`NeoVier/elm-review-no-function-outside-of-modules`](https://dark.elm.dmy.fr/packages/NeoVier/elm-review-no-function-outside-of-modules/latest/), [`webbhuset/elm-review-forbid-specific-imports`](https://dark.elm.dmy.fr/packages/webbhuset/elm-review-forbid-specific-imports/latest/ForbidSpecificImports), [`kress95/elm-review-indirect-internal`](https://package.elm-lang.org/packages/kress95/elm-review-indirect-internal/latest/)
 
-## Configuration
-
-```elm
-module ReviewConfig exposing (config)
-
-import NoFunctionOutsideOfModules
-import Review.Rule exposing (Rule)
-
-config : List Rule
-config =
-    [ NoFunctionOutsideOfModules.rule [ ( [ "Html.input" ], [ "View.Input" ] ) ]
-    ]
-```
-
-## Try it out
-
-You can try the example configuration above out by running the following command:
-
-```bash
-elm-review --template NeoVier/elm-review-no-function-outside-of-modules/example-with-no-html-input-outside-of-view
-```
+`elm-review-usage-scope-limit` covers the same functionality & more:
+- limit named patterns, types, operators, functions, values
+- limit for specific things or all members of packages or directories or modules – specific or with specific starts/endings
+- limit to specific directories or modules or those with specific starts/endings
+- `Config`s are more descriptive
+- customize report details
+- use [`Review.ModuleNameLookupTable`](https://dark.elm.dmy.fr/packages/jfmengels/elm-review/latest/Review-ModuleNameLookupTable)
+    - cover implicit (default) imports

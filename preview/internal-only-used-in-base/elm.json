@@ -1,15 +1,16 @@
 {
     "type": "application",
     "source-directories": [
-        "src"
+        "src",
+        "../src"
     ],
     "elm-version": "0.19.1",
     "dependencies": {
         "direct": {
             "elm/core": "1.0.5",
-            "jfmengels/elm-review": "2.4.2",
-            "stil4m/elm-syntax": "7.2.5",
-            "NeoVier/elm-review-no-function-outside-of-modules": "2.0.0"
+            "jfmengels/elm-review": "2.7.2",
+            "lue-bird/elm-no-record-type-alias-constructor-function": "1.0.5",
+            "stil4m/elm-syntax": "7.2.9"
         },
         "indirect": {
             "elm/html": "1.0.0",
@@ -19,7 +20,7 @@
             "elm/random": "1.0.0",
             "elm/time": "1.0.0",
             "elm/virtual-dom": "1.0.2",
-            "elm-community/list-extra": "8.3.1",
+            "elm-community/list-extra": "8.5.2",
             "elm-explorations/test": "1.2.2",
             "miniBill/elm-unicode": "1.0.2",
             "rtfeldman/elm-hex": "1.0.0",
@@ -27,9 +28,7 @@
         }
     },
     "test-dependencies": {
-        "direct": {
-            "elm-explorations/test": "1.2.2"
-        },
+        "direct": {},
         "indirect": {}
     }
 }

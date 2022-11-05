@@ -1,5 +1,5 @@
 {
-  "name": "elm-review-no-function-outside-of-modules",
+  "name": "elm-review-usage-scope-limit",
   "scripts": {
     "test": "npm-run-all --print-name --silent --sequential test:make test:format test:run test:review test:package",
     "test:make": "elm make --docs=docs.json",
